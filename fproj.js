@@ -12,7 +12,7 @@ const tasks = [
     body:
       'Aliquip cupidatat ex adipisicing veniam do tempor. Lorem nulla adipisicing et esse cupidatat qui deserunt in fugiat duis est qui. Est adipisicing ipsum qui cupidatat exercitation. Cupidatat aliqua deserunt id deserunt excepteur nostrud culpa eu voluptate excepteur. Cillum officia proident anim aliquip. Dolore veniam qui reprehenderit voluptate non id anim.\r\n',
     title:
-      'Deserunt laborum id consectetur pariatur veniam occaecat occaecat tempor voluptate pariatur nulla reprehenderit ipsum.',
+      'Eu ea incididunt sunt consectetur fugiat non',
   },
   {
     _id: '5d2ca9e2e03d40b3232496aa7',
@@ -27,7 +27,7 @@ const tasks = [
     body:
       'Aliquip cupidatat ex adipisicing veniam do tempor. Lorem nulla adipisicing et esse cupidatat qui deserunt in fugiat duis est qui. Est adipisicing ipsum qui cupidatat exercitation. Cupidatat aliqua deserunt id deserunt excepteur nostrud culpa eu voluptate excepteur. Cillum officia proident anim aliquip. Dolore veniam qui reprehenderit voluptate non id anim.\r\n',
     title:
-      'Deserunt laborum id consectetur pariatur veniam occaecat occaecat tempor voluptate pariatur nulla reprehenderit ipsum.',
+      'Eu ea incididunt sunt consectetur fugiat non',
   },
 ];
 
@@ -49,6 +49,7 @@ const tasks = [
   renderAllTasks(objOfTasks);
   form.addEventListener('submit', onFormSubmitHandler);
   listContainer.addEventListener('click', onDeletehandler);
+  listContainer.addEventListener('click', onCompleteHandler);// =========================
 
   function renderAllTasks(tasksList) {
     if (!tasksList) {
@@ -73,8 +74,9 @@ const tasks = [
       'align-items-center',
       'flex-wrap',
       'mt-2',
+      
     );
-    li.setAttribute('data-task-id', _id);
+    li.setAttribute('data-task-id', _id); // iddddd
 
     const span = document.createElement('span');
     span.textContent = title;
@@ -84,12 +86,17 @@ const tasks = [
     deleteBtn.textContent = 'Delete task';
     deleteBtn.classList.add('btn', 'btn-danger', 'ml-auto', 'delete-btn');
 
+    const completeBtn = document.createElement('button');
+    completeBtn.textContent = 'Complete!';
+    completeBtn.classList.add('btn', 'btn-dark', 'ml-auto', 'btn-complete')
+
     const article = document.createElement('p');
     article.textContent = body;
     article.classList.add('mt-2', 'w-100');
 
     li.appendChild(span);
     li.appendChild(deleteBtn);
+    li.appendChild(completeBtn);
     li.appendChild(article);
 
     return li;
@@ -166,6 +173,17 @@ const tasks = [
       deleteTaskFromHtml(confirmed, parent);
       
     }
+  }
+
+  function onCompleteHandler({ target }) {
+      if(target.classList.contains('btn-complete')) {
+        const parent = target.closest('[data-task-id]');
+        changeColorTask(parent);
+        
+      }
+  }
+  function changeColorTask(parent){
+    parent.classList.add('bg-success')
   }
 
 })(tasks);
