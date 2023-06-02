@@ -53,6 +53,7 @@ const tasks = [
   function renderAllTasks(tasksList) {
     if (!tasksList) {
       console.error('Передайте список задач!');
+      messageEpty();
       return;
     }
 
@@ -128,7 +129,28 @@ const tasks = [
     const isConfirm = confirm(`Точно вы хотите удалить задачу: ${title}`);
     if (!isConfirm) return isConfirm;
     delete objOfTasks[id];
+
+    isEmptyListMessage(); //--
     return isConfirm;
+  }
+
+  function isEmptyListMessage(){
+    let taskiiMasiv = [];
+    for(let t in objOfTasks){
+      taskiiMasiv.push(t)
+    }
+    
+    if(taskiiMasiv.length == 0)  messageEpty('вы удалили все задачи')   
+  }
+
+  function messageEpty(text = 'нет заметок') {
+    const h1 = document.createElement('h1');
+    const fragment1 = document.createDocumentFragment();
+    h1.textContent = text;
+    fragment1.appendChild(h1);
+
+
+    listContainer.appendChild(fragment1);
   }
 
   function deleteTaskFromHtml(confirmed, el) {
@@ -142,6 +164,7 @@ const tasks = [
       const id = parent.dataset.taskId;
       const confirmed = deleteTask(id);
       deleteTaskFromHtml(confirmed, parent);
+      
     }
   }
 
