@@ -41,15 +41,69 @@ const tasks = [
   const listContainer = document.querySelector(
     '.tasks-list-section .list-group',
   );
+  const containeR = document.querySelector('.tasks-list-section')
   const form = document.forms['addTask'];
   const inputTitle = form.elements['title'];
   const inputBody = form.elements['body'];
 
+  console.log(containeR)
+  
   // Events
   renderAllTasks(objOfTasks);
+  filterTaskComplete();
   form.addEventListener('submit', onFormSubmitHandler);
   listContainer.addEventListener('click', onDeletehandler);
   listContainer.addEventListener('click', onCompleteHandler);// =========================
+  
+
+  function filterTaskComplete() {
+    const btnFiltrComplete = document.createElement('button');
+    btnFiltrComplete.classList.add('btn','ml-auto' , 'btn-primary', 'btcomplete', 'd-flex', 'align-center', 'mx-auto');
+    btnFiltrComplete.textContent = 'показать незавершенные задачи';
+
+    const btnFiltrAllTask = document.createElement('button');
+    btnFiltrAllTask.classList.add('btn', 'ml-auto', 'btn-secondary', 'btAll', 'd-flex', 'align-center',  'mt-1', 'mx-auto');
+    btnFiltrAllTask.textContent = 'показать все задачи';
+
+    const fragmentBtn = document.createDocumentFragment();
+    fragmentBtn.appendChild(btnFiltrComplete);
+    fragmentBtn.appendChild(btnFiltrAllTask);
+    //containeR.appendChild(fragmentBtn);
+
+    containeR.insertAdjacentElement('afterbegin', btnFiltrAllTask);
+    containeR.insertAdjacentElement('afterbegin', btnFiltrComplete);
+
+    btnFiltrAllTask.addEventListener('click', funcShowAll)
+    btnFiltrComplete.addEventListener('click', funcShowComplete)
+  }
+  
+  function funcShowAll(e){
+    console.log('show all task')
+    // renderAllTasks(objOfTasks);
+  }
+  function funcShowComplete(e){
+    console.log('show complete task')
+    renderCompleteTask()
+  }
+
+  function renderCompleteTask() {
+    // // if (!tasksList) {
+    // //   console.error('Список задач пуст');
+    // //   messageEpty();
+    // //   return;
+    // // }
+
+    // const fragment = document.createDocumentFragment();
+    // // Object.values(tasksList).forEach(task => {
+    // //   const li = listItemTemplate(task);
+    // //   fragment.appendChild(li);
+    // // });
+    // const h2 = document.createElement('h2')
+    // textContent = 'h2h2h2h2h'
+    // fragment.appendChild(h2)
+    // listContainer.appendChild(fragment);
+
+  }
 
   function renderAllTasks(tasksList) {
     if (!tasksList) {
