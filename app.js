@@ -53,7 +53,7 @@ const tasks = [
   filterTaskComplete();
   form.addEventListener('submit', onFormSubmitHandler);
   listContainer.addEventListener('click', onDeletehandler);
-  listContainer.addEventListener('click', onCompleteHandler);// =========================
+  listContainer.addEventListener('click', onCompleteHandler);
   
 
   function filterTaskComplete() {
@@ -85,26 +85,6 @@ const tasks = [
     console.log('show complete task')
     renderCompleteTask()
   }
-
-  function renderCompleteTask() {
-    // // if (!tasksList) {
-    // //   console.error('Список задач пуст');
-    // //   messageEpty();
-    // //   return;
-    // // }
-
-    // const fragment = document.createDocumentFragment();
-    // // Object.values(tasksList).forEach(task => {
-    // //   const li = listItemTemplate(task);
-    // //   fragment.appendChild(li);
-    // // });
-    // const h2 = document.createElement('h2')
-    // textContent = 'h2h2h2h2h'
-    // fragment.appendChild(h2)
-    // listContainer.appendChild(fragment);
-
-  }
-
   function renderAllTasks(tasksList) {
     if (!tasksList) {
       console.error('Передайте список задач!');
@@ -130,7 +110,7 @@ const tasks = [
       'mt-2',
       
     );
-    li.setAttribute('data-task-id', _id); // iddddd
+    li.setAttribute('data-task-id', _id); 
 
     const span = document.createElement('span');
     span.textContent = title;
@@ -191,7 +171,7 @@ const tasks = [
     if (!isConfirm) return isConfirm;
     delete objOfTasks[id];
 
-    isEmptyListMessage(); //--
+    isEmptyListMessage(); 
     return isConfirm;
   }
 
